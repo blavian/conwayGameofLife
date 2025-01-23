@@ -9,17 +9,23 @@ def generate_grid(rows, columns):
 
 
 def print_grid(grid):
-    for col in grid:
-        for row in col:
-            row = '| '
-            print(row, end = '')
-            print()
+    num_of_columns = len(grid[0])
+    vertical_divider = ("----" * num_of_columns) + "-\n"
+    printout = vertical_divider
+    for row in grid:
+        for _ in row:
+            # open up a new cell for each column
+            printout += '|   '
+        printout += "|\n"
+        printout += vertical_divider
+    print(printout)
     
+
         
 
-
-
-print(print_grid(generate_grid(2, 4)))
+g = generate_grid(3,2)
+print(g)
+print(print_grid(g))
 
 
 
