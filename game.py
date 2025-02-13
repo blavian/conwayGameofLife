@@ -28,12 +28,13 @@ def find_next_iteration(grid):
     # loop through the grid
     for x_idx, x in enumerate(grid):
         for y_idx, y in enumerate(x):
-            num_neighbors = find_neigbors(x_idx, y_idx)
+            num_neighbors = find_neigbors(grid, x_idx, y_idx)
+            #print(f'There are {num_neighbors} neighbors for ({x_idx}, {y_idx})')
             if y == "X":
-                if num_neighbors < 2 or num_neighbors > 3:
+                if num_neighbors and num_neighbors < 2 or num_neighbors > 3:
                     cells_to_kill.append((x_idx, y_idx))
             else:  # otherwise y is not x and is a dead cell
-                if num_neighbors == 3:
+                if num_neighbors and num_neighbors == 3:
                     cells_to_regenerate.append((x_idx, y_idx))
     for cell in cells_to_kill:
         grid[cell[0]][cell[1]] = 0
@@ -42,40 +43,34 @@ def find_next_iteration(grid):
     print_grid(grid)
 
 
-def find_neigbors(x, y):
-    return 2
-
-
-
-
-def test(grid, x_value, y_value):
+def find_neigbors(grid, x_value, y_value):
     neighbor_count = 0
     x = len(grid)
     y = len(grid[1])
     # check to the right and make sure we dont check past the column length
-    if grid[x_value][y_value + 1] == 'X' and y_value + 1 < y:
-        neighbor_count+=1
-    # check to the left and make sure there is a cell there
-    if  grid[x_value][y_value - 1] == 'X' and y_value - 1 >= 0:
-        neighbor_count+=1
-    # check up and make sure there is a cell there
-    if  grid[x_value - 1][y_value] == 'X' and x_value - 1 >= 0:
-        neighbor_count+=1
-    #check down and make sure we dont check past the row length
-    if grid[x_value + 1][y_value] == 'X' and x_value + 1 < x:
-        neighbor_count+=1
-    if grid[x_value+1][y_value+1] or grid[x_value-1][y_value-1] or grid[x_value-1][y_value+1] or grid[x_value+1][y_value-1] == 'X' and x_value + 1 < x and y_value + 1 < y and x_value - 1 >= 0 and y_value - 1 >= 0:
-        neighbor_count+=1
-    print(neighbor_count)
-        
-        
-        
+    if y_value + 1 < y:
+        if grid[x_value][y_value + 1] == "X": 
+            neighbor_count += 1
 
+    # check to the left and make sure there is a cell there
+    if  y_value - 1 >= 0: 
+        if grid[x_value][y_value - 1] == "X":
+            neighbor_count += 1
+    # check up and make sure there is a cell there
+    if x_value - 1 >= 0:
+        if grid[x_value - 1][y_value] == "X":
+            neighbor_count += 1
+    # check down and make sure we dont check past the row length
+    if x_value + 1 < x:
+        if grid[x_value + 1][y_value] == "X":
+            neighbor_count += 1
+    
+    if x_value + 1 < x and y_value + 1 < y and x_value - 1 >= 0 and y_value - 1 >= 0:    
+        if grid[x_value + 1][y_value + 1] or grid[x_value - 1][y_value - 1] or grid[x_value - 1][y_value + 1] or grid[x_value + 1][y_value - 1] == "X":
+            neighbor_count += 1
+    return neighbor_count
 
 
 g = generate_grid(4, 4, [(2, 2), (1, 3), (0, 0), (0, 1)])
-print(g)
 print_grid(g)
 find_next_iteration(g)
-
-test(g, 2, 2)
