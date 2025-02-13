@@ -37,8 +37,8 @@ def find_next_iteration(grid):
                 if num_neighbors < 2 or num_neighbors > 3:
                     cells_to_kill.append((x_idx, y_idx))
             else: # otherwise y is not x and is a dead cell
-                    if num_neighbors == 3:
-                        cells_to_regenerate.append((x_idx, y_idx))
+                if num_neighbors == 3:
+                    cells_to_regenerate.append((x_idx, y_idx))
     for cell in cells_to_kill:
         grid[cell[0]][cell[1]] = 0
     for cell in cells_to_regenerate:
