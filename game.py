@@ -29,7 +29,7 @@ def find_next_iteration(grid):
     for x_idx, x in enumerate(grid):
         for y_idx, y in enumerate(x):
             num_neighbors = find_neigbors(grid, x_idx, y_idx)
-            #print(f'There are {num_neighbors} neighbors for ({x_idx}, {y_idx})')
+            # print(f'There are {num_neighbors} neighbors for ({x_idx}, {y_idx})')
             if y == "X":
                 if num_neighbors and num_neighbors < 2 or num_neighbors > 3:
                     cells_to_kill.append((x_idx, y_idx))
@@ -47,13 +47,13 @@ def find_neigbors(grid, x_value, y_value):
     neighbor_count = 0
     x = len(grid)
     y = len(grid[1])
-    # check to the right and make sure we dont check past the column length
+   # check to the right and make sure we dont check past the column length
     if y_value + 1 < y:
-        if grid[x_value][y_value + 1] == "X": 
+        if grid[x_value][y_value + 1] == "X":
             neighbor_count += 1
 
     # check to the left and make sure there is a cell there
-    if  y_value - 1 >= 0: 
+    if y_value - 1 >= 0:
         if grid[x_value][y_value - 1] == "X":
             neighbor_count += 1
     # check up and make sure there is a cell there
@@ -64,13 +64,25 @@ def find_neigbors(grid, x_value, y_value):
     if x_value + 1 < x:
         if grid[x_value + 1][y_value] == "X":
             neighbor_count += 1
-    
-    if x_value + 1 < x and y_value + 1 < y and x_value - 1 >= 0 and y_value - 1 >= 0:    
-        if grid[x_value + 1][y_value + 1] or grid[x_value - 1][y_value - 1] or grid[x_value - 1][y_value + 1] or grid[x_value + 1][y_value - 1] == "X":
+    if x_value + 1 < x and y_value + 1 < y:
+        if grid[x_value + 1][y_value + 1] == "X":
+            neighbor_count += 1
+    if x_value - 1 >= 0 and y_value - 1 >= 0:
+        if grid[x_value - 1][y_value - 1] == "X":
+            neighbor_count += 1
+    if x_value - 1 >= 0 and y_value + 1 < y:
+        if grid[x_value - 1][y_value + 1] == "X":
+            neighbor_count += 1
+    if x_value + 1 < x and  y_value - 1 >= 0:
+        if grid[x_value + 1][y_value - 1] == "X":
             neighbor_count += 1
     return neighbor_count
 
+if __name__ == "__main__":  
+    g = generate_grid(4, 4, [(2, 2), (1, 3), (0, 0), (0, 1)])
+    print(g)
+    print_grid(g)
+    for value in g:
+        if 'X' in value:
+            find_next_iteration(g)
 
-g = generate_grid(4, 4, [(2, 2), (1, 3), (0, 0), (0, 1)])
-print_grid(g)
-find_next_iteration(g)
