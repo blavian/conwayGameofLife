@@ -1,3 +1,5 @@
+import os
+import time
 def generate_grid(rows, columns, initial_living_cells):
     grid = [[0 for _ in range(columns)] for _ in range(rows)]
     for cell in initial_living_cells:
@@ -84,5 +86,7 @@ if __name__ == "__main__":
     print_grid(g)
     for value in g:
         if 'X' in value:
+            time.sleep(2)
+            os.system('clear')
             find_next_iteration(g)
 
