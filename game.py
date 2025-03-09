@@ -81,12 +81,14 @@ def find_neigbors(grid, x_value, y_value):
     return neighbor_count
 
 if __name__ == "__main__":  
-    g = generate_grid(4, 4, [(2, 2), (1, 3), (0, 0), (0, 1)])
-    print(g)
-    print_grid(g)
-    for value in g:
-        if 'X' in value:
-            time.sleep(2)
-            os.system('clear')
-            find_next_iteration(g)
+   #g = generate_grid(4, 4, [(2, 2), (1, 3), (0, 0), (0, 1)])
+   g = generate_grid(7, 7, [(4, 2), (4, 3), (4, 4), (3, 4), (2,3)])
+    # print initial grid 
+   print_grid(g)
+   for column in g:
+        for row in column:
+            if row == 'X':
+                time.sleep(2)
+                os.system('clear')
+                find_next_iteration(g)
 
