@@ -92,7 +92,6 @@ class Game:
 if __name__ == "__main__":
     g = Game(7, 7, [(4, 2), (4, 3), (4, 4), (3, 4), (2,3)])
     print(g)
-    previous_grid = g.grid
     while any('X' in column for column in g.grid):
        time.sleep(2)
        os.system('clear')
