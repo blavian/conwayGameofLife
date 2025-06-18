@@ -2,6 +2,7 @@ import time
 import os
 class Game:
     def __init__(self,rows, columns, initial_living_cells):
+        
         self.rows = rows
         self.columns = columns
         self.initial_living_cells = initial_living_cells
@@ -30,9 +31,7 @@ class Game:
     
     def find_neigbors(self, x_value, y_value):
         neighbor_count = 0
-        #x = len(self.grid)
         x = self.columns
-        # y = len(self.grid[1])
         y = self.rows
     # check to the right and make sure we dont check past the column length
         if y_value + 1 < self.rows:
@@ -90,7 +89,11 @@ class Game:
 
 
 if __name__ == "__main__":
-    g = Game(7, 7, [(4, 2), (4, 3), (4, 4), (3, 4), (2,3)])
+    rows = int(input('How many rows do you want? '))
+    columns = int(input('How many columns do you want? ' ))
+    rows = 8
+    columns = 8
+    g = Game(rows, columns, [(4, 2), (4, 3), (4, 4), (3, 4), (2,3)])
     print(g)
     while any('X' in column for column in g.grid):
        time.sleep(2)
