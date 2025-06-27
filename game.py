@@ -6,6 +6,10 @@ class Game:
         self.rows = rows
         self.columns = columns
         self.initial_living_cells = initial_living_cells
+        # raise an error when the living cells are nout of the bounds of the grid
+        for cell in self.initial_living_cells:
+            if cell[0] < 0 or cell[0] >= self.rows or cell[1] < 0 or cell[1] >= self.columns:
+                raise ValueError(f"The cell {cell} is out of bounds") 
         self.grid = self.generate_grid()
     
     
@@ -91,8 +95,7 @@ class Game:
 if __name__ == "__main__":
     rows = int(input('How many rows do you want? '))
     columns = int(input('How many columns do you want? ' ))
-    rows = 8
-    columns = 8
+
     g = Game(rows, columns, [(4, 2), (4, 3), (4, 4), (3, 4), (2,3)])
     print(g)
     while any('X' in column for column in g.grid):
